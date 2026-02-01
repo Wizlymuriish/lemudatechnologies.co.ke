@@ -41,822 +41,7 @@
         }
     }
 </script>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    body {
-        font-family: 'Inter', sans-serif;
-    }
-    .carousel-slide {
-        transition: transform 0.5s ease-in-out;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    .blog-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    .whatsapp-float {
-        animation: pulse 2s infinite;
-        size: 100px;
-    }
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    /* Blog Detail Modal Specific Styles */
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.7);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        animation: fadeIn 0.3s ease;
-    }
-    .modal-content {
-        background: white;
-        border-radius: 12px;
-        max-width: 800px;
-        width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-        animation: slideUp 0.4s ease;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Cart Modal Specific Styles */
-    .cart-modal .modal-content {
-        max-width: 600px;
-    }
-    .cart-item {
-        display: flex;
-        align-items: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid #e5e7eb;
-    }
-    .cart-item:last-child {
-        border-bottom: none;
-    }
-    .cart-item-image {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-        margin-right: 1rem;
-    }
-    .cart-item-info {
-        flex-grow: 1;
-    }
-    .cart-item-name {
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-    }
-    .cart-item-price {
-        color: #1f2937;
-        font-weight: 600;
-    }
-    .cart-item-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-left: 1rem;
-    }
-    .quantity-btn {
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #d1d5db;
-        background-color: #f9fafb;
-        cursor: pointer;
-        border-radius: 0.25rem;
-        font-size: 0.875rem;
-        transition: background-color 0.2s;
-    }
-    .quantity-btn:hover {
-        background-color: #e5e7eb;
-    }
-    .remove-btn {
-        color: #ef4444;
-        cursor: pointer;
-        margin-left: 0.5rem;
-        font-size: 1.25rem;
-        transition: color 0.2s;
-    }
-    .remove-btn:hover {
-        color: #dc2626;
-    }
-    .cart-total {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 2px dashed #d1d5db;
-    }
-
-    /* Search Result Highlight */
-    .highlight {
-        background-color: yellow;
-        font-weight: bold;
-    }
-
-    /* Product Card Visibility */
-    .product-card.hidden {
-        display: none;
-    }
-    .product-card.visible {
-        display: block;
-        animation: fadeIn 0.3s ease-in;
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    /* Category Filter Button */
-    .category-btn.active {
-        background-color: #2563eb; /* Primary color */
-        color: white;
-    }
-
-   /* Product Detail Modal - COMPACT VERSION */
-.product-detail-modal .modal-content {
-    max-width: 750px; /* Reduced from 1000px */
-    width: 92%;       /* Reduced from 95% */
-    max-height: 85vh; /* Reduced from 95vh */
-}
-.product-detail-modal .product-detail-images {
-    display: flex;
-    gap: 0.75rem;     /* Reduced from 1rem */
-    margin-bottom: 1.25rem;
-}
-.product-detail-modal .product-main-image {
-    height: 180px;    /* Reduced from 400px */
-    background-color: #f8f9fa;
-    border-radius: 0.75rem;
-    size:100px;
-}
-.product-detail-modal .product-thumbnails {
-    width: 500px;      /* Reduced from 100px */
-    gap: 0.375rem;    /* Reduced from 0.5rem */
-}
-.product-detail-modal .thumbnail {
-    height: 200px;     /* Reduced from 100px */
-    border-radius: 0.375rem;
-}
-.product-detail-modal .product-detail-title {
-    font-size: 1.4rem; /* Reduced from 1.75rem */
-    margin-bottom: 0.4rem;
-}
-.product-detail-modal .product-detail-price {
-    font-size: 1.35rem; /* Reduced from 1.5rem */
-    margin-bottom: 0.8rem;
-}
-.product-detail-modal .product-detail-description {
-    font-size: 0.92rem; /* Slightly smaller */
-    line-height: 1.55;
-    margin-bottom: 1.1rem;
-}
-.product-detail-modal .product-detail-actions {
-    gap: 0.8rem;      /* Reduced from 1rem */
-    margin-top: 0.9rem;
-}
-/* Reduce padding inside modal */
-.product-detail-modal .modal-content > div {
-    padding: 1.25rem !important; /* Reduced from p-6 (1.5rem) */
-}
-/* Compact specs section */
-.product-detail-modal .product-specs-item {
-    padding: 0.375rem 0;
-    font-size: 0.875rem;
-}
-.product-detail-modal .product-specs-item span.font-medium {
-    font-size: 0.9rem;
-}
-/* Compact warranty section */
-.product-detail-modal .warranty-badge {
-    padding: 0.15rem 0.5rem !important;
-    font-size: 0.75rem !important;
-}
-    .carousel-slide img {
-  min-height: -200px;
-  max-height: -600px;
-  object-fit: cover;
-  
-}
-/* Product Card Visibility */
-.product-card.hidden {
-    display: none;
-}
-.product-card.visible {
-    display: block;
-    animation: fadeIn 0.3s ease-in;
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.product-card.hidden {
-    display: none;
-}
-.product-card.visible {
-    display: block;
-    animation: fadeIn 0.3s ease-in;
-}
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Additional styles to existing CSS */
-.search-result-item {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-result-item:hover {
-    background-color: #f0f0f0; /* Or any preferred hover color */
-}
-
-.search-result-item img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 4px;
-}
-
-.search-result-item-content {
-    display: flex;
-    align-items: center;
-}
-
-.search-result-item-details {
-    flex-grow: 1;
-}
-
-.search-result-item-name {
-    font-weight: 500;
-    margin-bottom: 2px;
-}
-
-.search-result-item-price {
-    font-size: 0.875rem;
-    color: #6b7280; /* Tailwind gray-500 */
-}
-
-/* Ensure dropdown appears above other content */
-#searchResultsDropdown,
-#mobileSearchResultsDropdown {
-    z-index: 50; /* Higher than header if needed */
-}
-
-/* Optional: Style scrollbar for dropdown if scrollable */
-#searchResultsDropdown::-webkit-scrollbar,
-#mobileSearchResultsDropdown::-webkit-scrollbar {
-  width: 6px;
-}
-
-#searchResultsDropdown::-webkit-scrollbar-track,
-#mobileSearchResultsDropdown::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-#searchResultsDropdown::-webkit-scrollbar-thumb,
-#mobileSearchResultsDropdown::-webkit-scrollbar-thumb {
-  background: #c5c5c5;
-  border-radius: 3px;
-}
-
-#searchResultsDropdown::-webkit-scrollbar-thumb:hover,
-#mobileSearchResultsDropdown::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-/* Mobile Menu Transparency */
-#mobileMenu {
-    /* Remove bg-white to make it transparent */
-    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white, or fully transparent rgba(0,0,0,0) */
-    backdrop-filter: blur(10px); /* Optional: Adds a blur effect behind the menu */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for separation */
-    /* Keep other existing styles */
-    /* position: fixed; */ /* Uncomment if you want it fixed over content instead of pushing it down */
-    /* top: 0; */ /* Uncomment if using position: fixed */
-    /* left: 0; */ /* Uncomment if using position: fixed */
-    /* right: 0; */ /* Uncomment if using position: fixed */
-    /* z-index: 50; */ /* Ensure it's above other content if fixed */
-    /* height: 100vh; */ /* Uncomment if using position: fixed and want full height */
-    /* overflow-y: auto; */ /* Uncomment if using position: fixed and content overflows */
-    /* padding-top: 60px; */ /* Adjust based on header height if fixed */
-    /* padding-bottom: 20px; */ /* Add bottom padding for aesthetics */
-    /* transition: transform 0.3s ease-in-out; */ /* If you want slide animation */
-    /* transform: translateY(-100%); */ /* Hidden initially if using animation */
-    /* transform: translateY(0); */ /* Visible when active if using animation */
-}
-
-/* Ensure content inside mobile menu is readable against the potentially transparent background */
-#mobileMenu .px-4,
-#mobileMenu .pb-4 {
-    background-color: rgba(255, 255, 255, 0.9); /* Add background to content areas if needed */
-    border-radius: 8px; /* Optional: Rounded corners for content blocks */
-    margin-bottom: 8px; /* Space between elements */
-}
-
-/* Style for the navigation links inside the mobile menu */
-#mobileMenu a {
-    display: block;
-    padding: 12px 16px; /* Add padding for easier tapping */
-    font-weight: 500;
-    color: #1f2937; /* Dark text for contrast */
-    text-decoration: none;
-    border-radius: 6px; /* Rounded corners for links */
-    transition: background-color 0.2s;
-}
-
-#mobileMenu a:hover {
-    background-color: #f3f4f6; /* Light hover background */
-}
-
-/* Ensure search bar inside mobile menu has a background */
-#mobileMenu input[type="text"] {
-    background-color: white; /* Ensure search bar background */
-    border-color: #d1d5db; /* Ensure search bar border */
-}
-
-
-#mobileSearchResultsDropdown {
-    background-color: rgba(255, 255, 255, 0.98); /* Slightly less transparent than menu */
-    backdrop-filter: blur(5px); /* Match or adjust blur strength */
-    border-radius: 0.5rem; /* Maintain rounded corners */
-    overflow: hidden; /* Contain the blur */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Maintain shadow */
-}
-
-/* Optional: Adjust the logo container in mobile menu if needed */
-#mobileMenu .flex.justify-center.mb-4 {
-    background-color: rgba(255, 255, 255, 0.9); /* Add background if logo needs it */
-    padding: 8px; /* Add padding around logo */
-    border-radius: 8px; /* Rounded corners */
-    margin-bottom: 12px; /* Space below logo */
-}
-/* Add to your existing CSS */
-.product-card {
-  height: auto !important;
-  max-height: 250px;
-}
-.product-card img {
-  height: 192px !important;
-}
-.product-card h3 {
-  font-size: 0.875rem !important;
-}
-.product-card p {
-  font-size: 0.75rem !important;
-}
-/* Search Bar Clear Button Styling */
-.clear-search-btn {
-  transition: color 0.2s ease;
-}
-
-.clear-search-btn:hover {
-  color: #ef4444; /* Red on hover */
-}
-
-.clear-search-btn:active {
-  transform: scale(0.9);
-}
-
-/* Search input focus state */
-#searchInput:focus + .clear-search-btn {
-  color: #6b7280;
-}
-/* Search Clear Button Styling */
-.clear-search-btn {
-    transition: color 0.2s ease;
-    cursor: pointer;
-}
-.clear-search-btn:hover {
-    color: #ef4444; /* Red on hover */
-}
-.clear-search-btn {
-    transition: color 0.2s ease;
-    cursor: pointer;
-    z-index: 10; /* Ensure it's above other elements */
-    position: relative; /* Make z-index work */
-}
-
-.clear-search-btn:hover {
-    color: #ef4444; /* Red on hover */
-}
-
-
-/* Clear Button - Ensure it's always clickable */
-
-.clear-search-btn:hover {
-    color: #ef4444; /* Red on hover */
-}
-
-.clear-search-btn:active {
-    transform: scale(0.9);
-}
-
-/* Ensure search input doesn't overlap the clear button */
-#searchBar,
-#mobileSearchBar {
-    padding-right: 32px !important; /* Make space for clear button */
-}
-
-/* Clear button container positioning */
-.clear-search-btn {
-    right: 8px !important; /* Adjust position to be more accessible */
-    padding: 4px 8px !important;
-}
-/*Clear Button - Simple and always clickable */
-.clear-search-btn {
-    cursor: pointer;
-    z-index: 50;
-    position: relative;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    transition: none; /* No animation */
-}
-
-.clear-search-btn:hover {
-    color: #ef4444; /* Just change color on hover */
-}
-
-/* Ensure search input has space for clear button */
-#searchBar,
-#mobileSearchBar {
-    padding-right: 32px !important;
-}
-
-/* Clear button positioning */
-#clearSearchBtn,
-#clearMobileSearchBtn {
-    right: 8px !important;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/* RAM/ROM Variation Styles */
-.variation-container {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: #f9fafb;
-    border-radius: 0.5rem;
-}
-
-.variation-title {
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #1f2937;
-}
-
-.variation-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.5rem;
-}
-
-.variation-option {
-    padding: 0.5rem;
-    text-align: center;
-    border: 2px solid #d1d5db;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    font-size: 0.875rem;
-    transition: all 0.2s;
-}
-
-.variation-option:hover {
-    border-color: #2563eb;
-    background-color: #eff6ff;
-}
-
-.variation-option.active {
-    border-color: #2563eb;
-    background-color: #2563eb;
-    color: white;
-    font-weight: 600;
-}
-
-.variation-option.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-/* RAM/ROM Variation Styles */
-.variation-container {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: #f9fafb;
-    border-radius: 0.5rem;
-    border: 1px solid #e5e7eb;
-}
-
-.variation-title {
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #1f2937;
-    font-size: 0.9rem;
-}
-
-.variation-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.5rem;
-}
-
-.variation-option {
-    padding: 0.6rem 0.4rem;
-    text-align: center;
-    border: 2px solid #d1d5db;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    font-size: 0.75rem;
-    transition: all 0.2s;
-    font-weight: 500;
-}
-
-.variation-option:hover {
-    border-color: #2563eb;
-    background-color: #eff6ff;
-}
-
-.variation-option.active {
-    border-color: #2563eb;
-    background-color: #2563eb;
-    color: white;
-    font-weight: 600;
-}
-
-.variation-option.disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-.variation-option .price-tag {
-    display: block;
-    font-size: 0.65rem;
-    margin-top: 0.25rem;
-    color: #10b981;
-}
-/* Add to Cart Notification Popup */
-#addToCartNotification {
-  animation: slideInRight 0.3s ease-out;
-}
-
-#addToCartNotification.show {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: all;
-}
-
-#addToCartNotification.hide {
-  opacity: 0;
-  transform: translateX(200px);
-  pointer-events: none;
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-}
-
-/* Notification Success Animation */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.notification-success-icon {
-  animation: pulse 0.5s ease-in-out;
-}
-/* Add to Cart Notification Popup */
-#addToCartNotification {
-  animation: slideInRight 0.3s ease-out;
-}
-
-#addToCartNotification.show {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: all;
-}
-
-#addToCartNotification.hide {
-  opacity: 0;
-  transform: translateX(200px);
-  pointer-events: none;
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-}
-
-/* Notification Success Animation */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.notification-success-icon {
-  animation: pulse 0.5s ease-in-out;
-}
-
-/* Bounce animation for product image */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-/* Ensure mobile search container is properly positioned */
-#mobileSearchContainer {
-    z-index: 40;
-    background-color: white;
-}
-
-/* Mobile search button active state */
-#mobileSearchBtn.active i {
-    color: #2563eb;
-}
-
-/* Ensure search results dropdown is visible on mobile */
-#mobileSearchResultsDropdown {
-    z-index: 50;
-    background-color: white;
-    max-height: 300px;
-    overflow-y: auto;
-}
-/* Cart Modal Styling */
-.cart-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #e5e7eb;
-}
-.cart-item:last-child {
-    border-bottom: none;
-}
-.cart-item-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 0.5rem;
-    margin-right: 1rem;
-}
-.cart-item-info {
-    flex-grow: 1;
-}
-.cart-item-name {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
-}
-.cart-item-price {
-    color: #1f2937;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-.cart-item-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: 1rem;
-}
-.quantity-btn {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #d1d5db;
-    background-color: #f9fafb;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    transition: background-color 0.2s;
-}
-.quantity-btn:hover {
-    background-color: #e5e7eb;
-}
-.remove-btn {
-    color: #ef4444;
-    cursor: pointer;
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-    transition: color 0.2s;
-}
-.remove-btn:hover {
-    color: #dc2626;
-}
-.cart-total {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px dashed #d1d5db;
-}
-/* Ensure mobile cart badge is always visible */
-#cartCountMobile {
-    z-index: 100 !important;
-    position: absolute !important;
-    top: -0.25rem !important;
-    right: -0.25rem !important;
-    min-width: 1.25rem !important;
-    height: 1.25rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="min-h-screen bg-gray-50 text-gray-800">
 
@@ -1129,8 +314,8 @@ All Products
 <button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="Samsung">
 Samsung
 </button>
-<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="iPhone">
-Iphone
+<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="apple">
+apple
 </button>
 <button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="Infinix">
 Infinix
@@ -1150,18 +335,14 @@ Tecno
 <button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="Itel">
 Itel
 </button>
-<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="villaon">
-Villaon
-</button>
+
 <button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="Vivo">
 Vivo
 </button>
-<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="zte">
-ZTE BLade
+<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="Accessories">
+Accessories
 </button>
-<button class="category-filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-gray-200" data-category="tabs">
-Modio Tabs
-</button>
+
 </div>
 
 <!-- Sort & View Options -->
@@ -1348,7 +529,7 @@ Modio Tabs
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3">
       
       <!-- Product 1 - Infinix hot 60i -->
-      <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 flex" 
+      <div class="product-card bg-white  rounded-x2 shadow-md overflow-hidden transition-all duration-300 flex" 
            data-product-id="77" 
            data-category="Infinix">
         <div class="w-1/2 relative">
@@ -1372,19 +553,14 @@ Modio Tabs
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
               </div>
-              <span class="text-sm text-gray-500 ml-2">(15)</span>
+             
             </div>
-            <h3 class="font-semibold text-lg mb-2">Infinix hot 60i</h3>
-            <p class="text-gray-600 text-sm mb-4">
-              New In The Market<br>
-              • Storage 256GB<br>
-              • ROM 8GB<br>
-              • 12 months warranty
-            </p>
+            <h3 class="font-semibold text-lg mb-2">Infinix hot 60i</h3><br><span class="text-1 font-bold text-dark">KSh 12,999</span>
+            
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-2xl font-bold text-dark">KSh 12,999</span>
+              
             </div>
             <div class="flex space-x-2">
               <button class="add-to-cart bg-primary hover:bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors"
@@ -1425,19 +601,14 @@ Modio Tabs
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
               </div>
-              <span class="text-sm text-gray-500 ml-2">(15)</span>
+              
             </div>
-            <h3 class="font-semibold text-lg mb-2">Redmi note 14</h3>
-            <p class="text-gray-600 text-sm mb-4">
-              108mp rear camera<br>
-              • Storage 256GB<br>
-              • RAM 6+6GB<br>
-              • 6 months warranty
-            </p>
+            <h3 class="font-semibold text-lg mb-2">Redmi note 14</h3><br><span class="text-1 font-bold text-dark">KSh 12,999</span>
+            
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-2xl font-bold text-dark">KSh 17,499</span>
+             
             </div>
             <div class="flex space-x-2">
               <button class="add-to-cart bg-primary hover:bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors"
@@ -2830,8 +2001,35 @@ function showCartModal() {
     document.body.style.overflow = 'hidden';
 }
     
-   
-
+   function updateCartBadge() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Try multiple selectors to find the badge
+    const badgeSelectors = [
+        '.cart-badge',
+        '.cart-count',
+        '#cartBadge',
+        '.nav-cart .badge'
+    ];
+    
+    badgeSelectors.forEach(selector => {
+        const badges = document.querySelectorAll(selector);
+        badges.forEach(badge => {
+            if (cartCount > 0) {
+                badge.textContent = cartCount;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.textContent = '';
+                badge.style.display = 'none';
+            }
+        });
+    });
+}
+// Call on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartBadge();
+});
 // ========================================
 // 3. ADD TO CART FUNCTION - FIXED
 // ========================================
@@ -3103,7 +2301,7 @@ function showProductDetailModal(product) {
     productDetailCategory.className = 'category-badge mb-2 inline-block px-3 py-1 rounded-full text-xs font-semibold';
     const categoryColors = {
         'samsung': 'bg-blue-100 text-blue-800',
-        'iphone': 'bg-gray-100 text-gray-800',
+        'apple': 'bg-gray-100 text-gray-800',
         'infinix': 'bg-green-100 text-green-800',
         'redmi': 'bg-red-100 text-red-800',
         'tecno': 'bg-purple-100 text-purple-800',
@@ -3598,31 +2796,31 @@ const shoppingProducts = [
             { ram: "8GB", rom: "256GB", price: 85000, stock: 5 },
               { ram: "8GB", rom: "512GB", price: 86000, stock: 5 }
         ], specs: { display: "6.7-inch foldable Dynamic AMOLED", processor: "Snapdragon 8 Gen 3", ram: "8GB", storage: "256/512GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3700mAh", os: "One UI based on Android" } },
-  { id: 34, name: "iPhone 13", price: 64500, basePrice: 64500, originalPrice: 64500, description: "Apple's flagship smartphone with A15 Bionic chip.", rating: 4.8, image: "iphone-13.jpg", images: ["iphone-13.jpg", "iphone-13-back.jpg", "iphone-13-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 34, name: "iPhone 13", price: 64500, basePrice: 64500, originalPrice: 64500, description: "Apple's flagship smartphone with A15 Bionic chip.", rating: 4.8, image: "iphone-13.jpg", images: ["iphone-13.jpg", "iphone-13-back.jpg", "iphone-13-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "4GB", rom: "128GB", price: 64500, stock: 10 }
         ], specs: { display: "6.1-inch Super Retina XDR", processor: "A15 Bionic", ram: "4GB", storage: "128GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3240mAh", os: "iOS" } },
-  { id: 35, name: "iPhone 14", price: 68000, basePrice: 68000, originalPrice: 68000, description: "Enhanced performance with improved camera system.", rating: 4.8, image: "iphone-14.jpg", images: ["iphone-14.jpg", "iphone-14-back.jpg", "iphone-14-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 35, name: "iPhone 14", price: 68000, basePrice: 68000, originalPrice: 68000, description: "Enhanced performance with improved camera system.", rating: 4.8, image: "iphone-14.jpg", images: ["iphone-14.jpg", "iphone-14-back.jpg", "iphone-14-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "6GB", rom: "128GB", price: 68000, stock: 10 },
               { ram: "6GB", rom: "256GB", price: 85500, stock: 10 }
         ], specs: { display: "6.1-inch Super Retina XDR", processor: "A16 Bionic", ram: "6GB", storage: "128/256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3279mAh", os: "iOS" } },
-  { id: 36, name: "iPhone 15", price: 77000, basePrice: 77000, originalPrice: 77000, description: "Dynamic Island design with enhanced performance.", rating: 4.9, image: "iphone-15.jpg", images: ["iphone-15.jpg", "iphone-15-back.jpg", "iphone-15-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 36, name: "iPhone 15", price: 77000, basePrice: 77000, originalPrice: 77000, description: "Dynamic Island design with enhanced performance.", rating: 4.9, image: "iphone-15.jpg", images: ["iphone-15.jpg", "iphone-15-back.jpg", "iphone-15-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "6GB", rom: "128GB", price: 77000, stock: 10 },
               { ram: "6GB", rom: "256GB", price: 94500, stock: 10 }
         ], specs: { display: "6.1-inch Super Retina XDR", processor: "A17 Pro", ram: "6GB", storage: "128/256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3349mAh", os: "iOS" } },
-  { id: 37, name: "iPhone 16", price: 91500, basePrice: 91500, originalPrice: 91500, description: "Next-generation iPhone with advanced features.", rating: 4.9, image: "iphone-16.jpg", images: ["iphone-16.jpg", "iphone-16-back.jpg", "iphone-16-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 37, name: "iPhone 16", price: 91500, basePrice: 91500, originalPrice: 91500, description: "Next-generation iPhone with advanced features.", rating: 4.9, image: "iphone-16.jpg", images: ["iphone-16.jpg", "iphone-16-back.jpg", "iphone-16-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "8GB", rom: "128GB", price: 91500, stock: 10 },
               { ram: "8GB", rom: "256GB", price: 98000, stock: 10 }
         ], specs: { display: "6.1-inch Super Retina XDR", processor: "A18 Pro", ram: "8GB", storage: "128/256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3561mAh", os: "iOS" } },
-  { id: 38, name: "iPhone 16 Pro Max", price: 151500, basePrice: 151500, originalPrice: 151500, description: "Ultimate iPhone experience with Pro Max features.", rating: 5.0, image: "iphone-16promax.jpg", images: ["iphone-16promax.jpg", "iphone-16promax-back.jpg", "iphone-16promax-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 38, name: "iPhone 16 Pro Max", price: 151500, basePrice: 151500, originalPrice: 151500, description: "Ultimate iPhone experience with Pro Max features.", rating: 5.0, image: "iphone-16promax.jpg", images: ["iphone-16promax.jpg", "iphone-16promax-back.jpg", "iphone-16promax-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "8GB", rom: "256GB", price: 151500, stock: 10 }
         ], specs: { display: "6.8-inch Super Retina XDR", processor: "A18 Pro", ram: "8GB", storage: "256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "4676mAh", os: "iOS" } },
-  { id: 39, name: "iPhone 17", price: 120000, basePrice: 120000, originalPrice: 120000, description: "Next-generation iPhone with cutting-edge technology.", rating: 5.0, image: "iphone-17.jpg", images: ["iphone-17.jpg", "iphone-17-back.jpg", "iphone-17-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 39, name: "iPhone 17", price: 120000, basePrice: 120000, originalPrice: 120000, description: "Next-generation iPhone with cutting-edge technology.", rating: 5.0, image: "iphone-17.jpg", images: ["iphone-17.jpg", "iphone-17-back.jpg", "iphone-17-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "8GB", rom: "256GB", price: 120000, stock: 10 }
         ], specs: { display: "6.3-inch Super Retina XDR", processor: "A19 Pro", ram: "8GB", storage: "256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "3800mAh", os: "iOS" } },
-  { id: 40, name: "iPhone 17 Pro", price: 170500, basePrice: 170500, originalPrice: 170500, description: "Professional features with premium design.", rating: 5.0, image: "iphone-17pro.jpg", images: ["iphone-17pro.jpg", "iphone-17pro-back.jpg", "iphone-17pro-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 40, name: "iPhone 17 Pro", price: 170500, basePrice: 170500, originalPrice: 170500, description: "Professional features with premium design.", rating: 5.0, image: "iphone-17pro.jpg", images: ["iphone-17pro.jpg", "iphone-17pro-back.jpg", "iphone-17pro-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "8GB", rom: "256GB", price: 170500, stock: 10 }
         ], specs: { display: "6.3-inch Super Retina XDR", processor: "A19 Pro", ram: "8GB", storage: "256GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "4000mAh", os: "iOS" } },
-  { id: 41, name: "iPhone 17 Pro Max", price: 182000, basePrice: 182000, originalPrice: 182000, description: "Ultimate iPhone with professional-grade features.", rating: 5.0, image: "iphone-17promax.jpg", images: ["iphone-17promax.jpg", "iphone-17promax-back.jpg", "iphone-17promax-side.jpg"], category: "iPhone", isNew: false, stock: 10, warranty: 12, variations: [
+  { id: 41, name: "iPhone 17 Pro Max", price: 182000, basePrice: 182000, originalPrice: 182000, description: "Ultimate iPhone with professional-grade features.", rating: 5.0, image: "iphone-17promax.jpg", images: ["iphone-17promax.jpg", "iphone-17promax-back.jpg", "iphone-17promax-side.jpg"], category: "apple", isNew: false, stock: 10, warranty: 12, variations: [
             { ram: "8GB", rom: "256GB", price: 182000, stock: 10 },
               { ram: "8GB", rom: "512GB", price: 217500, stock: 10 }
         ], specs: { display: "6.8-inch Super Retina XDR", processor: "A19 Pro", ram: "8GB", storage: "256/512GB", camera: "Main Camera Details", frontCamera: "Front Camera Details", battery: "4676mAh", os: "iOS" } },
@@ -4148,7 +3346,8 @@ function renderShoppingProducts() {
 // Update the createProductCard function (around line 9)
 function createProductCard(product) {
   const card = document.createElement('div');
-  card.className = `bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 ${currentView === 'grid' ? 'flex flex-col' : 'flex flex-row'}`;
+  // CRITICAL: Add 'product-card' class for click handler to work
+  card.className = `product-card bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 ${currentView === 'grid' ? 'flex flex-col' : 'flex flex-row'}`;
   card.setAttribute('data-product-id', product.id);
   
   const isNewBadge = product.isNew ? '<span class="bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded">New</span>' : '';
@@ -4161,104 +3360,99 @@ function createProductCard(product) {
   if (product.variations && product.variations.length > 0) {
     displayPrice = product.variations[0].price;
   }
-  
+
   if (currentView === 'grid') {
+    // FIXED GRID VIEW: Removed ONLY the eye icon container (lines with "absolute top-1 left-1")
     card.innerHTML = `
-    <div class="relative">
-      <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-      <div class="absolute top-1 right-1 flex flex-col gap-0.5">
-        ${isNewBadge}
-        ${discountBadge}
-        ${stockBadge}
-      </div>
-      <div class="absolute top-1 left-1">
-        <button class="quick-view-btn w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100" data-id="${product.id}">
-          <i class="far fa-eye text-gray-600 text-[9px]"></i>
-        </button>
-      </div>
+<div class="relative">
+  <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+  <div class="absolute top-1 right-1 flex flex-col gap-0.5">
+    ${isNewBadge}
+    ${discountBadge}
+    ${stockBadge}
+  </div>
+  <!-- EYE ICON CONTAINER REMOVED HERE - NOTHING ELSE CHANGED -->
+</div>
+<div class="p-2 flex flex-col flex-grow">
+  <div class="flex items-center mb-1">
+    <span class="text-yellow-400 text-xs">${ratingStars}</span>
+    <span class="text-[10px] text-gray-500 ml-1">(${Math.floor(Math.random() * 50) + 10})</span>
+  </div>
+  <h3 class="font-semibold text-sm mb-1 line-clamp-1">${product.name}</h3>
+  <p class="text-gray-600 text-[11px] mb-2 line-clamp-2">${product.description}</p>
+  <div class="mt-auto">
+    <div class="flex items-baseline mb-2">
+      <span class="text-base font-bold text-primary">KSh ${displayPrice.toLocaleString()}</span>
+      ${product.originalPrice > displayPrice ? `<span class="text-gray-400 line-through ml-1 text-[10px]">KSh ${product.originalPrice.toLocaleString()}</span>` : ''}
     </div>
-    <div class="p-2 flex flex-col flex-grow">
-      <div class="flex items-center mb-1">
-        <span class="text-yellow-400 text-xs">${ratingStars}</span>
-        <span class="text-[10px] text-gray-500 ml-1">(${Math.floor(Math.random() * 50) + 10})</span>
-      </div>
-      <h3 class="font-semibold text-sm mb-1 line-clamp-1">${product.name}</h3>
-      <p class="text-gray-600 text-[11px] mb-2 line-clamp-2">${product.description}</p>
-      <div class="mt-auto">
-        <div class="flex items-baseline mb-2">
-          <span class="text-base font-bold text-primary">KSh ${displayPrice.toLocaleString()}</span>
-          ${product.originalPrice > displayPrice ? `<span class="text-gray-400 line-through ml-1 text-[10px]">KSh ${product.originalPrice.toLocaleString()}</span>` : ''}
-        </div>
-        <div class="flex gap-1">
-          <button class="add-to-cart-btn bg-primary hover:bg-secondary text-white font-medium py-1.5 px-2.5 rounded transition-colors flex-1 text-[11px]"
-            data-id="${product.id}"
-            data-name="${product.name}"
-            data-price="${displayPrice}"
-            data-image="${product.image}">
-            <i class="fas fa-shopping-cart mr-1 text-[9px]"></i>Add
-          </button>
-          <button class="order-whatsapp-btn bg-green-500 hover:bg-green-600 text-white font-medium w-7 h-7 rounded flex items-center justify-center transition-colors"
-            data-name="${product.name}"
-            data-price="${displayPrice}"
-            data-image="${product.image}">
-            <i class="fab fa-whatsapp text-[9px]"></i>
-          </button>
-        </div>
-      </div>
+    <div class="flex gap-1">
+      <button class="add-to-cart-btn bg-primary hover:bg-secondary text-white font-medium py-1.5 px-2.5 rounded transition-colors flex-1 text-[11px]"
+        data-id="${product.id}"
+        data-name="${product.name}"
+        data-price="${displayPrice}"
+        data-image="${product.image}">
+        <i class="fas fa-shopping-cart mr-1 text-[9px]"></i>Add
+      </button>
+      <button class="order-whatsapp-btn bg-green-500 hover:bg-green-600 text-white font-medium w-7 h-7 rounded flex items-center justify-center transition-colors"
+        data-name="${product.name}"
+        data-price="${displayPrice}"
+        data-image="${product.image}">
+        <i class="fab fa-whatsapp text-[9px]"></i>
+      </button>
     </div>
+  </div>
+</div>
     `;
-  } else {
-    // List view (similar update)
+  } 
+    else {
+    // FIXED LIST VIEW: Removed ONLY the quick-view button from actions container
     card.innerHTML = `
-    <div class="flex gap-3 p-2">
-      <img src="${product.image}" alt="${product.name}" class="w-20 h-20 object-cover rounded flex-shrink-0">
-      <div class="flex-grow">
-        <div class="flex items-start justify-between">
-          <div>
-            <div class="flex items-center mb-1">
-              <span class="text-yellow-400 text-xs">${ratingStars}</span>
-              <span class="text-[10px] text-gray-500 ml-1">(${Math.floor(Math.random() * 50) + 10})</span>
-            </div>
-            <h3 class="font-semibold text-sm mb-1">${product.name}</h3>
-            <p class="text-gray-600 text-[11px] mb-1 line-clamp-2">${product.description}</p>
-          </div>
-          <div class="flex flex-col items-end">
-            ${isNewBadge ? `<div class="mb-0.5">${isNewBadge}</div>` : ''}
-            ${discountBadge ? `<div class="mb-0.5">${discountBadge}</div>` : ''}
-            ${stockBadge ? `<div class="mb-0.5">${stockBadge}</div>` : ''}
-          </div>
+<div class="flex gap-3 p-2">
+  <img src="${product.image}" alt="${product.name}" class="w-20 h-20 object-cover rounded flex-shrink-0">
+  <div class="flex-grow">
+    <div class="flex items-start justify-between">
+      <div>
+        <div class="flex items-center mb-1">
+          <span class="text-yellow-400 text-xs">${ratingStars}</span>
+          <span class="text-[10px] text-gray-500 ml-1">(${Math.floor(Math.random() * 50) + 10})</span>
         </div>
-        <div class="flex items-center justify-between mt-2 pt-2 border-t">
-          <div class="flex items-baseline">
-            <span class="text-base font-bold text-primary">KSh ${displayPrice.toLocaleString()}</span>
-            ${product.originalPrice > displayPrice ? `<span class="text-gray-400 line-through ml-1 text-[10px]">KSh ${product.originalPrice.toLocaleString()}</span>` : ''}
-          </div>
-          <div class="flex gap-1">
-            <button class="add-to-cart-btn bg-primary hover:bg-secondary text-white font-medium py-1.5 px-2.5 rounded transition-colors text-[11px]"
-              data-id="${product.id}"
-              data-name="${product.name}"
-              data-price="${displayPrice}"
-              data-image="${product.image}">
-              <i class="fas fa-shopping-cart mr-1 text-[9px]"></i>Add
-            </button>
-            <button class="order-whatsapp-btn bg-green-500 hover:bg-green-600 text-white w-7 h-7 rounded flex items-center justify-center transition-colors"
-              data-name="${product.name}"
-              data-price="${displayPrice}"
-              data-image="${product.image}">
-              <i class="fab fa-whatsapp text-[9px]"></i>
-            </button>
-            <button class="quick-view-btn w-7 h-7 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition-colors" data-id="${product.id}">
-              <i class="far fa-eye text-gray-600 text-[9px]"></i>
-            </button>
-          </div>
-        </div>
+        <h3 class="font-semibold text-sm mb-1">${product.name}</h3>
+        <p class="text-gray-600 text-[11px] mb-1 line-clamp-2">${product.description}</p>
+      </div>
+      <div class="flex flex-col items-end">
+        ${isNewBadge ? `<div class="mb-0.5">${isNewBadge}</div>` : ''}
+        ${discountBadge ? `<div class="mb-0.5">${discountBadge}</div>` : ''}
+        ${stockBadge ? `<div class="mb-0.5">${stockBadge}</div>` : ''}
       </div>
     </div>
+    <div class="flex items-center justify-between mt-2 pt-2 border-t">
+      <div class="flex items-baseline">
+        <span class="text-base font-bold text-primary">KSh ${displayPrice.toLocaleString()}</span>
+        ${product.originalPrice > displayPrice ? `<span class="text-gray-400 line-through ml-1 text-[10px]">KSh ${product.originalPrice.toLocaleString()}</span>` : ''}
+      </div>
+      <div class="flex gap-1">
+        <button class="add-to-cart-btn bg-primary hover:bg-secondary text-white font-medium py-1.5 px-2.5 rounded transition-colors text-[11px]"
+          data-id="${product.id}"
+          data-name="${product.name}"
+          data-price="${displayPrice}"
+          data-image="${product.image}">
+          <i class="fas fa-shopping-cart mr-1 text-[9px]"></i>Add
+        </button>
+        <button class="order-whatsapp-btn bg-green-500 hover:bg-green-600 text-white w-7 h-7 rounded flex items-center justify-center transition-colors"
+          data-name="${product.name}"
+          data-price="${displayPrice}"
+          data-image="${product.image}">
+          <i class="fab fa-whatsapp text-[9px]"></i>
+        </button>
+        <!-- QUICK-VIEW BUTTON REMOVED HERE - NOTHING ELSE CHANGED -->
+      </div>
+    </div>
+  </div>
+</div>
     `;
   }
   return card;
 }
-
 // ========================================
 // 10. CATEGORY FILTER
 // ========================================
@@ -5304,16 +4498,16 @@ if (searchBar && clearSearchBtn) {
 }
 
 // ========================================
-// SHOPPING PAGE PRODUCT CLICK HANDLER (FIXED)
-// ========================================
+// SHOPPING PAGE PRODUCT CLICK HANDLER (FIXED - PRESERVES ALL DETAILS)
 document.addEventListener('click', function(e) {
-  // Handle shopping page product clicks (dynamically generated)
+  // Handle shopping page product clicks
   const shoppingProductCard = e.target.closest('#shoppingProductsGrid .product-card');
   if (shoppingProductCard) {
-    // Don't open modal if clicking on action buttons
+    // DON'T open modal if clicking on action buttons or their children
     if (e.target.closest('.add-to-cart-btn') || 
-        e.target.closest('.order-whatsapp-btn') || 
-        e.target.closest('.quick-view-btn')) {
+        e.target.closest('.order-whatsapp-btn') ||
+        e.target.closest('button') ||  // Prevent ANY button from triggering modal
+        e.target.closest('a')) {       // Prevent links from triggering modal
       return;
     }
     
@@ -5325,16 +4519,8 @@ document.addEventListener('click', function(e) {
     }
   }
   
-  // Handle Quick View buttons in shopping grid
-  if (e.target.closest('.quick-view-btn')) {
-    e.preventDefault();
-    const btn = e.target.closest('.quick-view-btn');
-    const productId = parseInt(btn.getAttribute('data-id'));
-    const product = shoppingProducts.find(p => p.id === productId);
-    if (product) {
-      showProductDetailModal(product);
-    }
-  }
+  // REMOVE old quick-view handler (no longer needed since eye icon is gone)
+  // DELETE any existing handler that looks for '.quick-view-btn' clicks
 });
 
 // ========================================
@@ -5810,4 +4996,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
